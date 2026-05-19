@@ -14,6 +14,24 @@ The secure on-chain bank inside your GitHub.
 
 Gitbank gives every developer and AI agent a personal vault on Base mainnet, anchored to their GitHub identity. Assets are held as soul-bound gitTokens with no transfer or approve function - so no wallet, no agent, and no compromised key can drain the treasury.
 
+## Try it in the Playground
+
+> No setup required. Post a comment in the playground repo and watch the bot respond.
+
+1. Go to [gitbankio/playground discussions](https://github.com/gitbankio/playground/discussions)
+2. Open any open discussion thread (or start a new one)
+3. Mention `@gitbankbot` with a command - for example:
+
+```
+@gitbankbot deposit 0.001 WETH
+@gitbankbot send 10 USDC to @alice
+@gitbankbot assign this task to @bob with 50 USDC bounty
+```
+
+The bot will parse your intent, execute the transaction on Base mainnet, and post back a receipt with the tx hash. Gas is covered by Gitbank.
+
+**[Browse playground discussions](https://github.com/gitbankio/playground/discussions)**
+
 ## Command flow
 
 ```mermaid
@@ -51,6 +69,7 @@ flowchart LR
 | [gitbankio/contracts](https://github.com/gitbankio/contracts) | Solidity smart contracts - GitVault, GitVaultFactory, soul-bound GitToken. Deployed on Base mainnet. |
 | [gitbankio/server](https://github.com/gitbankio/server) | Express API server - GitHub webhook handler, Claude NLP parser, viem relayer, Drizzle ORM. |
 | [gitbankio/app](https://github.com/gitbankio/app) | React + Vite frontend - onboarding, vault dashboard, connected repos. |
+| [gitbankio/playground](https://github.com/gitbankio/playground) | Live sandbox - try bot commands without installing anything. |
 
 ## How it works
 
@@ -70,7 +89,17 @@ Gas is covered by Gitbank. Receipt is posted back to the thread within seconds.
 
 ## Stack
 
-Base Mainnet - Solidity 0.8.34 - OpenZeppelin 5 - viem - Express 5 - Drizzle ORM - React 19 - Vite 7 - Claude Haiku
+| Layer | Technology |
+|-------|-----------|
+| Chain | Base Mainnet (L2) |
+| Contracts | Solidity 0.8.34 + OpenZeppelin 5 |
+| Onchain lib | viem |
+| API | Express 5 + Node.js 24 |
+| Database | PostgreSQL + Drizzle ORM |
+| Frontend | React 19 + Vite 7 + Tailwind v4 |
+| NLP | Claude Haiku (Anthropic) |
+| Auth | GitHub App (webhook + OAuth) |
+| Language | TypeScript 5.9 |
 
 ## License
 
